@@ -2,6 +2,8 @@ var request = require('request');
 var token = require('./secrets');
 var https = require('https');
 var fs = require('fs');
+require('dotenv').config()
+
 var myArgs = process.argv.slice(2);
 
 if (myArgs.length === 2){
@@ -11,7 +13,7 @@ if (myArgs.length === 2){
       url: "https://api.github.com/repos/" + myArgs[0] + "/" + myArgs[1] + "/contributors",
       headers: {
         'User-Agent': 'request',
-        'Authorization': 'Bearer ' + token.GITHUB_TOKEN
+        'Authorization': 'Bearer ' + process.env.GITHUB_TOKEN
       }
     };
     request(options, function(err, res, body) {
